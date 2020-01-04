@@ -1,0 +1,23 @@
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  tests:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Read .nvmrc
+        id: nvm
+        run: echo "::set-output name=NVMRC::$(cat .nvmrc)"
+      - name: Set Node.js version
+        uses: actions/setup-node@v1
+        with:
+          node-version: '${{ steps.nvm.outputs.NVMRC }}'
+      - name: Run tests
+        run: |
+          npm ci
+          npm run test
