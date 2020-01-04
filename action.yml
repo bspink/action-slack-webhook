@@ -7,6 +7,9 @@ inputs:
   message_template_path:
     description: 'Path location for a message template, to be parsed by lodash templating. Relative to GITHUB_WORKSPACE'
     required: false
+  slack_webhook_url:
+    description: 'Slack Webhook URL to use for sending the message'
+    required: true
 runs:
   using: 'node12'
   main: 'index.js'
