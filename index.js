@@ -18,7 +18,7 @@ const run = async () => {
   // `message` and `message_template_path` inputs defined in action metadata file
   const message = core.getInput('message');
   const messageTemplatePath = core.getInput('message_template_path');
-  const { SLACK_WEBHOOK_URL: slackWebhookUrl } = process.env;
+  const slackWebhookUrl = core.getInput('slack_webhook_url');
   // Get the JSON webhook payload for the event that triggered the workflow
   const {
     context: { payload: githubPayload },
