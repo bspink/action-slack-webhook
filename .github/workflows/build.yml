@@ -19,6 +19,7 @@ jobs:
           node-version: '${{ steps.nvm.outputs.NVMRC }}'
       - name: Build
         run: |
+          npm ci
           npm run build
           changed="$((git diff --quiet -- dist/index.js && echo "false") || echo "true")"
           if [ "$changed" = "true"]; then
