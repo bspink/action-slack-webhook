@@ -37,4 +37,5 @@ jobs:
           node-version: '${{ steps.nvm.outputs.NVMRC }}'
       - name: Check for prettier formatting
         run: |
+          npm ci
           npm run prettier:check
