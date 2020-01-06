@@ -1,15 +1,17 @@
 name: 'Slack Webhook - Send Message'
 description: 'POST to a Slack Webhook URL'
 inputs:
+  slack_webhook_url:
+    description: 'Slack Webhook URL to use for sending the message'
+    required: true
   message:
     description: 'Message JSON to send to Slack'
     required: false
   message_template_path:
-    description: 'Path location for a message template, to be parsed by lodash templating. Relative to GITHUB_WORKSPACE'
+    description: 'Path location for a message template, to be parsed by lodash templating. Relative to GITHUB_WORKSPACE.'
     required: false
-  slack_webhook_url:
-    description: 'Slack Webhook URL to use for sending the message'
-    required: true
+  json_vars:
+    description: 'Comma-separated list of env var names to parse as JSON before including as variables for templating.'
 runs:
   using: 'node12'
   main: 'index.js'

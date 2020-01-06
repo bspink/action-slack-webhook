@@ -1,0 +1,1 @@
+{"text": "{{ JSON_VAR_1.value1 }} {{ JSON_VAR_1.value2 }} {{ JSON_VAR_2.value1 }} {{ JSON_VAR_2.value2 }}"}

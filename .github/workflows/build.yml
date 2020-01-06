@@ -1,0 +1,32 @@
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  check_build:
+    name: Check for build file
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Read .nvmrc
+        id: nvm
+        run: echo "::set-output name=NVMRC::$(cat .nvmrc)"
+      - name: Set Node.js version
+        uses: actions/setup-node@v1
+        with:
+          node-version: '${{ steps.nvm.outputs.NVMRC }}'
+      - name: Build
+        run: |
+          npm run build
+          changed="$((git diff --quiet -- dist/index.js && echo "false") || echo "true")"
+          if [ "$changed" = "true"]; then
+            git config user.email "bspink@users.noreply.github.com"
+            git config user.name "<a name>"
+            git add dist/index.js
+            git commit -m "Building dist/index.js"
+            git push
+          else
+            echo "No changes from build - noop"
+          fi
