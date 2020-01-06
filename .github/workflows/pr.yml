@@ -21,3 +21,20 @@ jobs:
         run: |
           npm ci
           npm run test
+
+  prettier:
+    name: Run prettier
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Read .nvmrc
+        id: nvm
+        run: echo "::set-output name=NVMRC::$(cat .nvmrc)"
+      - name: Set Node.js version
+        uses: actions/setup-node@v1
+        with:
+          node-version: '${{ steps.nvm.outputs.NVMRC }}'
+      - name: Check for prettier formatting
+        run: |
+          npm run prettier:check
