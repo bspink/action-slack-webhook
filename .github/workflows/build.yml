@@ -22,7 +22,7 @@ jobs:
           npm ci
           npm run build
           changed="$((git diff --quiet -- dist/index.js && echo "false") || echo "true")"
-          if [ "$changed" = "true"]; then
+          if [ "$changed" = "true" ]; then
             git config user.email "bspink@users.noreply.github.com"
             git config user.name "<a name>"
             git add dist/index.js
